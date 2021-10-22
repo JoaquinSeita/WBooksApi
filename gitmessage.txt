@@ -1,7 +1,6 @@
-Implement devise in the project
+Implemented devise-jwt in the project
 
-Two extra fields are also added to the user model: first name and 
-last_name. As requested in the project.
-
+The user registry is added. Also the user login with jwt.
+And the routes are modified to match the documentation.
 
 

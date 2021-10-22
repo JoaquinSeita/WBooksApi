@@ -3,7 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.9'
 
-gem 'devise'
+gem 'devise-jwt', "~> 0.6.0"
+gem 'dotenv-rails', groups: [:development, :test]
 gem 'execjs'
 gem 'therubyracer'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
