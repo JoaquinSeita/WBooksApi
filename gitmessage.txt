@@ -1,6 +1,0 @@
-Implemented devise-jwt in the project
-
-The user registry is added. Also the user login with jwt.
-And the routes are modified to match the documentation.
-
-
