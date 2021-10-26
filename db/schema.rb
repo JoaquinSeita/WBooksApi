@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_25_125743) do
+ActiveRecord::Schema.define(version: 2021_10_25_172759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "books", force: :cascade do |t|
+    t.string "Genre"
+    t.string "Author"
+    t.string "Image"
+    t.string "Title"
+    t.string "Publisher"
+    t.string "Year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "jwt_blacklists", force: :cascade do |t|
   end
