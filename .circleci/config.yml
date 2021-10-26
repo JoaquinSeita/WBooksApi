@@ -47,9 +47,9 @@ jobs:
       #     command: bundle exec rubocop app spec --format simple
 
       # Run Tests!
-      - run:
-          name: Run Tests
-          command: bundle exec rspec 
+      # - run:
+      #     name: Run Tests
+      #     command: bundle exec rspec 
 
 workflows:
   version: 2
