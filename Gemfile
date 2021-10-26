@@ -21,6 +21,7 @@ gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 
 group :development, :test do
+  gem 'rspec-rails', ">= 3.9.0"
   gem 'factory_bot_rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -33,7 +34,6 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', ">= 3.9.0"
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
