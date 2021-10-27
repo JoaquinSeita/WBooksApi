@@ -43,13 +43,13 @@ jobs:
       - run: bundle exec rake db:schema:load --trace
 
       # - run:
-      #     name: Run Rubocop
-      #     command: bundle exec rubocop app spec --format simple
+          name: Run Rubocop
+          command: bundle exec rubocop app spec --format simple
 
       # Run Tests!
-      # - run:
-      #     name: Run Tests
-      #     command: bundle exec rspec 
+      - run:
+          name: Run Tests
+          command: bundle exec rspec 
 
 workflows:
   version: 2

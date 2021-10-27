@@ -1,5 +1,4 @@
 require File.expand_path("../../config/environment", __FILE__)
-require 'database_cleaner'
 require 'rspec/rails'
 
 RSpec.configure do |config|
