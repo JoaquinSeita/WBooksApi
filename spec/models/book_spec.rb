@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Book, type: :model do
-  %i[Genre Author Image Title Publisher Year].each do |field|
+  %i[genre author image title publisher year].each do |field|
     it { should validate_presence_of(field) }
   end
 
@@ -10,16 +10,16 @@ describe Book, type: :model do
   end
 
   subject(:book) do
-    Book.new(Genre: genre, Author: author, Image: image, Title: title, Publisher: publisher,
-             Year: year)
+    Book.new(genre: genre, author: author, image: image, title: title, publisher: publisher,
+             year: year)
   end
 
-  let(:genre) { @book.Genre }
-  let(:author) { @book.Author }
-  let(:image) { @book.Image }
-  let(:title) { @book.Title }
-  let(:publisher) { @book.Publisher }
-  let(:year) { @book.Year }
+  let(:genre) { @book.genre }
+  let(:author) { @book.author }
+  let(:image) { @book.image }
+  let(:title) { @book.title }
+  let(:publisher) { @book.publisher }
+  let(:year) { @book.year }
 
   it do
     is_expected.to be_valid

@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.9'
 
 gem 'devise-jwt', "~> 0.6.0"
+gem 'kaminari'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'execjs'
 gem 'therubyracer'
@@ -19,8 +20,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'rubocop', '~> 1.11', require: false
 gem 'rubocop-rails', require: false
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
   gem 'rspec-rails', ">= 3.9.0"
   gem 'factory_bot_rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -34,7 +37,6 @@ group :development do
 end
 
 group :test do
-  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'

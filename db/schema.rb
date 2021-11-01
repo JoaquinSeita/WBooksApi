@@ -16,22 +16,24 @@ ActiveRecord::Schema.define(version: 2021_10_27_184849) do
   enable_extension "plpgsql"
 
   create_table "books", force: :cascade do |t|
-    t.string "Genre"
-    t.string "Author"
-    t.string "Image"
-    t.string "Title"
-    t.string "Publisher"
-    t.string "Year"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "genre", null: false
+    t.string "author", null: false
+    t.string "image", null: false
+    t.string "title", null: false
+    t.string "publisher", null: false
+    t.string "year", null: false
+    t.boolean "available", default: true, null: false
   end
 
-  create_table "jwt_blacklists", force: :cascade do |t|
+  create_table "jwt_blacklist", force: :cascade do |t|
+    t.string "jti", null: false
+    t.index ["jti"], name: "index_jwt_blacklist_on_jti"
   end
 
   create_table "rents", force: :cascade do |t|
-    t.date "from", default: "2021-10-27", null: false
+    t.date "from", null: false
     t.date "to", null: false
+    t.date "returned_at", null: false
     t.bigint "user_id"
     t.bigint "book_id"
     t.index ["book_id"], name: "index_rents_on_book_id"
@@ -44,10 +46,14 @@ ActiveRecord::Schema.define(version: 2021_10_27_184849) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
+    t.integer "unread_notifications_count", default: 0, null: false
+    t.integer "rents_count", default: 0, null: false
+    t.integer "comments_count", default: 0, null: false
+    t.integer "wishes_count", default: 0, null: false
+    t.string "locale", default: "en", null: false
+    t.string "image_url", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
