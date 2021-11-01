@@ -13,7 +13,8 @@ Rails.application.routes.draw do
               sessions: 'sessions',
               registrations: 'registrations'
             }
-        end
+      end
+      resources :books, only: [:index, :show], controller: 'books'
     end
   end
 end

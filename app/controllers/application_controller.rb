@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name image_url locale])
   end
 
   def render_resource(resource)
@@ -25,5 +25,13 @@ class ApplicationController < ActionController::Base
         }
       ]
     }, status: :bad_request
+  end
+
+  def page
+    @page ||= params[:page] || 1
+  end
+
+  def per_page
+    @per_page ||= params[:per_page] || 10
   end
 end
