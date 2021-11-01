@@ -1,11 +1,9 @@
-require 'faker'
-
 FactoryBot.define do
   factory :user do
-    email { Faker::Internet.email }
+    email { 'rama@mail.com' }
     password { 'qwerty' }
-    first_name { Faker::Name.first_name }
-    last_name { Faker::Name.last_name }
-    image_url { 'https://www.image.com' }
+    first_name { 'Ramiro' }
+    last_name { 'Pedraza' }
+    image_url { 'image.png' }
   end
 end
