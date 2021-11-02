@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_10_27_184849) do
     t.string "title", null: false
     t.string "publisher", null: false
     t.string "year", null: false
-    t.boolean "available", default: true, null: false
+    t.boolean "available", default: true
   end
 
   create_table "jwt_blacklist", force: :cascade do |t|
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2021_10_27_184849) do
   create_table "rents", force: :cascade do |t|
     t.date "from", null: false
     t.date "to", null: false
-    t.date "returned_at", null: false
+    t.date "returned_at"
     t.bigint "user_id"
     t.bigint "book_id"
     t.index ["book_id"], name: "index_rents_on_book_id"

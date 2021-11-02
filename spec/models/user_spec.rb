@@ -11,7 +11,7 @@ describe User, type: :model do
   subject(:user) do
     User.new(
       first_name: first_name, last_name: last_name, email: email, password: password,
-      password_confirmation: password_confirmation
+      image_url: image_url
     )
   end
 
@@ -19,26 +19,17 @@ describe User, type: :model do
   let(:last_name)             { Faker::Name.last_name }
   let(:email)                 { Faker::Internet.email }
   let(:password)              { 'password' }
-  let(:password_confirmation) { 'password' }
+  let(:image_url)             { 'https://image.png.com' }
 
   it do
     is_expected.to be_valid
   end
 
   describe '#create' do
-    context 'When the first_name is nil' do
-      let(:first_name) { nil }
-
-      it do
-        is_expected.to be_invalid
-      end
-    end
-
-    context 'When the last_name is nil' do
-      let(:last_name) { nil }
-
-      it do
-        is_expected.to be_invalid
+    %w[first_name last_name email password image_url].each do |field|
+      context "When #{field} is nil" do
+        let(field.to_sym) { nil }
+        it { is_expected.to be_invalid }
       end
     end
   end
