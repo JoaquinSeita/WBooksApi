@@ -11,22 +11,33 @@ module Api
       end
 
       def create
-        return unless valid_user?(rent_params[:user_id]) && valid_book?(rent_params[:book_id])
+        raise ActionController::ParameterMissing, rent_params if rent_params.empty?
 
         book = Book.find(rent_params[:book_id])
-        user = User.find(rent_params[:user_id])
-        rent_book(book, user) if valid_date? && book_available?(book)
+        rent_book(book) unless reject_unprocessable_entity(book)
       end
 
       def show
-        render json: Rent.find(params[:id]), serializer: RentSerializer if valid_rent?(params[:id])
+        render json: Rent.find(params[:id]), serializer: RentSerializer
       end
 
       def destroy
-        return unless valid_rent?(params[:id])
-
         rent = Rent.find(params[:id])
         rent_cancel(rent)
+      end
+
+      def rent_params
+        params.require(:rent).permit(:to, :from, :book_id)
+      end
+
+      private
+
+      def reject_unprocessable_entity(book)
+        unless rent_params[:from] && rent_params[:to]
+          return unprocessable_entity('You must provide to and from dates')
+        end
+        return unprocessable_entity('The book is not available right now') unless book.available
+        return unprocessable_entity('The dates are not valid') unless valid_date?
       end
     end
   end

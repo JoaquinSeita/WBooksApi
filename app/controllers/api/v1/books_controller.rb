@@ -8,7 +8,7 @@ module Api
       end
 
       def show
-        render json: Book.find(params[:id]), serializer: BookSerializer if valid_book?(params[:id])
+        render json: Book.find(params[:id]), serializer: BookSerializer
       end
     end
   end

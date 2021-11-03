@@ -46,8 +46,7 @@ describe Api::V1::RentsController, type: :controller do
   describe 'POST #create' do
     context 'When create a valid rent' do
       before do
-        params = { rent: { from: Time.zone.today, to: Time.zone.today + 1, book_id: book.id,
-                           user_id: user.id } }
+        params = { rent: { from: Time.zone.today, to: Time.zone.today + 1, book_id: book.id } }
         post :create, params: params, as: :json
       end
 
@@ -64,37 +63,38 @@ describe Api::V1::RentsController, type: :controller do
 
     context 'When create a invalid rent' do
       it 'invalid "to" date responds with 422' do
-        params = { rent: { from: Time.zone.today, to: Time.zone.today - 1, book_id: book.id,
-                           user_id: user.id } }
+        params = { rent: { from: Time.zone.today, to: Time.zone.today - 1, book_id: book.id } }
         post :create, params: params, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it 'invalid "from" date responds with 422' do
-        params = { rent: { from: Time.zone.today - 1, to: Time.zone.today, book_id: book.id,
-                           user_id: user.id } }
+        params = { rent: { from: Time.zone.today - 1, to: Time.zone.today, book_id: book.id } }
         post :create, params: params, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
-      it 'invalid "user_id" responds with 404' do
-        params = { rent: { from: Time.zone.today, to: Time.zone.today, book_id: book.id,
-                           user_id: 'user.id' } }
+      it 'empty "from" date responds with 422' do
+        params = { rent: { to: Time.zone.today + 1, book_id: book.id } }
         post :create, params: params, as: :json
-        expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'empty "to" date responds with 422' do
+        params = { rent: { from: Time.zone.today, book_id: book.id } }
+        post :create, params: params, as: :json
+        expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it 'invalid "book_id" responds with 404' do
-        params = { rent: { from: Time.zone.today, to: Time.zone.today, book_id: 'book.id',
-                           user_id: user.id } }
+        params = { rent: { from: Time.zone.today, to: Time.zone.today, book_id: 'book.id' } }
         post :create, params: params, as: :json
         expect(response).to have_http_status(:not_found)
       end
 
       it 'book not available responds with 422' do
         book.update!(available: false)
-        params = { rent: { from: Time.zone.today, to: Time.zone.today, book_id: book.id,
-                           user_id: user.id } }
+        params = { rent: { from: Time.zone.today, to: Time.zone.today, book_id: book.id } }
         post :create, params: params, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
       end

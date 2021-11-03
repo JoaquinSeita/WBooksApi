@@ -1,8 +1,18 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   before_action :configure_permitted_parameters, if: :devise_controller?
+  rescue_from ActionController::ParameterMissing, with: :params_missing
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   protected
+
+  def params_missing
+    render json: { 'error': 'Parameters cannot be empty!' }, status: :bad_request
+  end
+
+  def record_not_found
+    render json: { 'error': 'Record not found!' }, status: :not_found
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name image_url locale])
@@ -25,36 +35,6 @@ class ApplicationController < ActionController::Base
         }
       ]
     }, status: :bad_request
-  end
-
-  def valid_user?(user_id)
-    @user = User.find(user_id)
-  rescue ActiveRecord::RecordNotFound
-    not_found
-    nil
-  else true
-  end
-
-  def valid_book?(book_id)
-    @book = Book.find(book_id)
-  rescue ActiveRecord::RecordNotFound
-    not_found
-    nil
-  else true
-  end
-
-  def valid_rent?(rent_id)
-    @rent = Rent.find(rent_id)
-  rescue ActiveRecord::RecordNotFound
-    not_found
-    nil
-  else true
-  end
-
-  def not_found
-    render json: {
-      "error": 'Record not found'
-    }, status: :not_found
   end
 
   def unprocessable_entity(error_content)
