@@ -21,4 +21,6 @@ Rails.application.routes.draw do
       resources :rents, only: [:index, :create, :show, :destroy], controller: 'rents'
     end
   end
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 end

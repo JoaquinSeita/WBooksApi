@@ -18,8 +18,12 @@ module RentsControllerHelper
 
     rent = Rent.new(rent_params)
     rent.user_id = current_user.id
+    send_email_and_json(rent) if rent.save
+  end
 
-    return render json: rent, status: :ok, serializer: RentSerializer if rent.save
+  def send_email_and_json(rent)
+    HardWorker.perform_async(rent.id)
+    render json: rent, status: :ok, serializer: RentSerializer
   end
 
   def rent_cancel(rent)
