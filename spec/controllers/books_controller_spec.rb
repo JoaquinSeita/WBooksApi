@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Api::V1::BooksController, type: :controller do
   include_context 'Authenticated User'
+  include_context 'User, Book and Rent'
 
   describe 'GET #index' do
     context 'When fetching all the books' do
@@ -26,8 +27,6 @@ describe Api::V1::BooksController, type: :controller do
 
   describe 'GET #show' do
     context 'When fetching a book' do
-      let!(:book) { create(:book) }
-
       before do
         get :show, params: { id: book.id }
       end
@@ -40,6 +39,16 @@ describe Api::V1::BooksController, type: :controller do
 
       it 'responds with 200 status' do
         expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'When fetching a invalid book' do
+      before do
+        get :show, params: { id: 'book.id' }
+      end
+
+      it 'responds with 404 status' do
+        expect(response).to have_http_status(:not_found)
       end
     end
   end

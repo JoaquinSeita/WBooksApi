@@ -14,7 +14,11 @@ Rails.application.routes.draw do
               registrations: 'registrations'
             }
       end
+      patch '/me', to: 'users#update_profile'
+      get '/me', to:'users#profile'
+      resources :users, only: [:show], controller: 'users'
       resources :books, only: [:index, :show], controller: 'books'
+      resources :rents, only: [:index, :create, :show, :destroy], controller: 'rents'
     end
   end
 end

@@ -7,7 +7,7 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.string :title, null: false
       t.string :publisher, null: false
       t.string :year, null: false
-      t.boolean :available, null: false, default: true
+      t.boolean :available, default: true
     end
   end
 end
