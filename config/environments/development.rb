@@ -20,12 +20,12 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :domain => Rails.application.secrets.mailer_domain,
-    :password => Rails.application.secrets.mailer_password,
-    :user_name => Rails.application.secrets.mailer_username,
-    :address => Rails.application.secrets.mailer_address,
-    :port => Rails.application.secrets.mailer_port,
-    :authentication => Rails.application.secrets.mailer_authentication.to_sym 
+    :domain => Rails.application.credentials.mailer_domain,
+    :password => Rails.application.credentials.mailer_password,
+    :user_name => Rails.application.credentials.mailer_username,
+    :address => Rails.application.credentials.mailer_address,
+    :port => Rails.application.credentials.mailer_port,
+    :authentication => Rails.application.credentials.mailer_authentication.to_sym 
   }
   config.active_support.deprecation = :log
   config.active_record.migration_error = :page_load
