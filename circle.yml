@@ -1,4 +1,7 @@
-version: 2.5.9
+machine:
+  ruby:
+    version:
+      2.5.9
 
 dependencies:
   override:
