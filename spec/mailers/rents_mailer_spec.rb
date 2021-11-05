@@ -11,7 +11,7 @@ RSpec.describe RentsMailer, type: :mailer do
 
     it 'check the headers' do
       expect(mail.subject).to eq('[NO-REPLY] Details about the book rental!')
-      expect(mail.from).to eq([Rails.application.secrets.mailer_username])
+      expect(mail.from).to eq([ENV['MAILER_USERNAME'].to_s])
       expect(mail.to).to eq(['juan@gmail.com'])
     end
 
