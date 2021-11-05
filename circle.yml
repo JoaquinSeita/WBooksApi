@@ -1,12 +1,7 @@
 machine:
   ruby:
     version:
-      2.5.9
-
-dependencies:
-  override:
-    - mv config/secrets.ci.yml config/secrets.yml
-    
+      2.5.9    
 jobs:
   build:
     working_directory: ~/rails-training
