@@ -9,14 +9,29 @@ services:
       - /var/lib/postgresql/data
   redis:
     image: 'redis:4.0-alpine'
-    command: redis-server --requirepass yourpassword
+    command: redis-server
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis:/data'
+  sidekiq:
+    depends_on:
+      - 'db'
+      - 'redis'
+    build: .
+    command: bundle exec sidekiq
     volumes:
       - '.:/myapp'
+    env_file:
+    - '.env'
   web:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - .:/myapp
+    environment:
+      - REDIS_URL_SIDEKIQ=redis://redis:6379/1
+      - EDITOR=vim
     ports:
       - "3000:3000"
     depends_on:
@@ -24,3 +39,7 @@ services:
       - redis
     stdin_open: true
     tty: true
+
+volumes:
+  redis:
+  postgres:
