@@ -1,2 +1,13 @@
 en:
-  hello: "Hello world"
+  mail:
+    confirmation:
+      hi: 'Hi! Today'
+      hi_desc: 'you rent the following book:'
+      rent_desc: 'from'
+      rent_last: 'The rent lasts:'
+      rent_from: 'from'
+      rent_to: 'to'
+      please: 'Please return the book on the corresponding date.'
+      thank: 'Thank you!'
+      greetings: 'Greetings'
+      subject: '[NO-REPLY] Details about the book rental!'

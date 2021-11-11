@@ -1,0 +1,13 @@
+es:
+  mail:
+    confirmation:
+      hi: '¡Hola! Hoy'
+      hi_desc: 'alquilaste el siguiente libro:'
+      rent_desc: 'de'
+      rent_last: 'El alquiler es:'
+      rent_from: 'Desde'
+      rent_to: 'Hasta'
+      please: 'Por favor devolver el libro en la fecha correspondiente.'
+      thank: '¡Muchas gracias!'
+      greetings: 'Saludos'
+      subject: '[NO-RESPONDER] ¡Detalles del alquiler del libro!'
